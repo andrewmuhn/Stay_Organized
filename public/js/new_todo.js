@@ -33,7 +33,7 @@ const loadCategories = async () => {
         const categories = await categoriesResponse.json();
         categories.forEach((category) => {
             const option = document.createElement("option");
-            option.value = category.id;
+            option.value = category.name;
             option.textContent = category.name;
             document.getElementById("category").appendChild(option);
         });
