@@ -87,7 +87,7 @@
         "description": "Fix the tree swing",
         "deadline": "2023-05-10",
         "priority": "Low",
-        "completed": false
+        "completed": true
     },
     {
         "id": 11,

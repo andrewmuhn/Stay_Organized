@@ -285,15 +285,13 @@ app.put("/api/todos/:id", function (request, response) {
     });
 });
 
-/*
 // DELETE a todo
-app.delete('/api/todos/:id', function (request, response) {
-    console.info("LOG: Got a DELETE request for ToDos.  This feature is not implemented.");
-    response
-        .status(200)
-        .end();
-})
-*/
+app.delete("/api/todos/:id", function (request, response) {
+    console.info(
+        "LOG: Got a DELETE request for ToDos.  This feature is not implemented."
+    );
+    response.status(200).end();
+});
 
 // POST a new user
 app.post("/api/users", function (request, response) {
