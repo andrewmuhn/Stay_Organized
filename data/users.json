@@ -46,5 +46,12 @@
         "name": "Dudebro Chet",
         "username": "dudebro",
         "password": "EPIC!!!27"
-    }
+    },
+    {
+        "id": 9,
+        "name": "Andrew Muhn",
+        "username": "andrewmuhn",
+        "password": "password"
+    },
+    { "id": 10, "name": "Andy", "username": "a", "password": "1" }
 ]

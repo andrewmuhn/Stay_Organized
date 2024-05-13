@@ -63,7 +63,7 @@
                         <div class="flex-grow-1"></div>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a href="" class="nav-link">Register</a>
+                                <a href="" class="nav-link" id="registerNav" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
                             </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link">Login</a>
@@ -75,6 +75,7 @@
             </nav>
         </header>
         <main>
+            {{> registermodal}}
             {{{body}}}
         </main>
         <script
@@ -83,5 +84,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+        <script src="/js/login.js"></script>
     </body>
 </html>
