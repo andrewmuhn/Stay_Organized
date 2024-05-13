@@ -28,7 +28,7 @@ router.get("/", function (request, response) {
 });
 
 // Find out if a specific username is available
-router.get("/api/username_available/:username", function (request, response) {
+router.get("/username_available/:username", function (request, response) {
     const requestedUsername = request.params.username;
     console.info(
         `LOG: Checking to see if username ${requestedUsername} is available`

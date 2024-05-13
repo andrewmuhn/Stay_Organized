@@ -1,10 +1,13 @@
 const checkUserNameAvailability = async (username, name, password) => {
-    const userResponse = await fetch(`/api/username_available/${username}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+    const userResponse = await fetch(
+        `/api/users/username_available/${username}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
     const userAvailable = await userResponse.json();
     console.log(userAvailable);
     if (!userAvailable.available) {
