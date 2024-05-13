@@ -62,6 +62,8 @@ loadTodos = async (userid) => {
             deleteButton.type = "button";
             deleteButton.className = "btn btn-dark btn-sm";
             deleteButton.textContent = "X";
+            deleteButton.value = "Delete";
+            deleteButton.setAttribute("data-todo-id", todo.id);
 
             cardHeader.appendChild(descriptionSpan);
             cardHeader.appendChild(flexSpan);
@@ -83,18 +85,31 @@ loadTodos = async (userid) => {
             const priorityP = document.createElement("p");
             priorityP.textContent = `Priority: ${todo.priority}`;
 
-            const completedP = document.createElement("img");
-            completedP.style = "width: 20px; height: 20px;";
+            const completeSpan = document.createElement("span");
+            completeSpan.className = "d-flex justify-content-between";
+
+            const completedImg = document.createElement("img");
+            completedImg.style = "width: 20px; height: 20px;";
             if (todo.completed) {
-                completedP.src = "/images/checkmark.png";
+                completedImg.src = "/images/checkmark.png";
             } else {
-                completedP.src = "/images/x.png";
+                completedImg.src = "/images/x.png";
             }
+
+            const completeButton = document.createElement("button");
+            completeButton.type = "button";
+            completeButton.className = "btn btn-success btn-sm";
+            completeButton.textContent = "Mark Complete";
+            completeButton.value = "Complete";
+            completeButton.setAttribute("data-todo-id", todo.id);
+
+            completeSpan.appendChild(completedImg);
+            completeSpan.appendChild(completeButton);
 
             cardBody.appendChild(categoryP);
             cardBody.appendChild(deadlineP);
             cardBody.appendChild(priorityP);
-            cardBody.appendChild(completedP);
+            cardBody.appendChild(completeSpan);
 
             card.appendChild(cardHeader);
             card.appendChild(cardBody);
@@ -104,9 +119,48 @@ loadTodos = async (userid) => {
     }
 };
 
+deleteTodo = async (todoId) => {
+    const deleteResponse = await fetch(`/api/todos/${todoId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (deleteResponse.ok) {
+        document.getElementById("todosContainer").innerHTML = "";
+        loadTodos(document.getElementById("userSelect").value);
+    }
+};
+
+markComplete = async (todoId) => {
+    const completeResponse = await fetch(`/api/todos/${todoId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (completeResponse.ok) {
+        document.getElementById("todosContainer").innerHTML = "";
+        loadTodos(document.getElementById("userSelect").value);
+    }
+};
+
 loadUsers();
 
 document.getElementById("userSelect").addEventListener("change", (event) => {
     document.getElementById("todosContainer").innerHTML = "";
     loadTodos(event.target.value);
 });
+
+document
+    .getElementById("todosContainer")
+    .addEventListener("click", async (event) => {
+        console.log(event.target.value);
+        if (event.target.value === "Delete") {
+            const todoId = event.target.getAttribute("data-todo-id");
+            deleteTodo(todoId);
+        } else if (event.target.value === "Complete") {
+            const todoId = event.target.getAttribute("data-todo-id");
+            markComplete(todoId);
+        }
+    });
