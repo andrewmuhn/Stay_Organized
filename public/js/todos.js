@@ -38,7 +38,6 @@ loadTodos = async (userid) => {
                     break;
                 case "Medium":
                     card.className = "card bg-warning-subtle";
-
                     cardHeader.className = "card-header d-flex bg-warning";
                     break;
                 default:

@@ -55,5 +55,11 @@
     },
     { "id": 10, "name": "Andrew Muhn", "username": "a", "password": "1" },
     { "id": 11, "name": "Andrew Muhn", "username": "abc", "password": "123" },
-    { "id": 12, "name": "Andrew Muhn", "username": "abcd", "password": "123" }
+    { "id": 12, "name": "Andrew Muhn", "username": "abcd", "password": "123" },
+    {
+        "id": 13,
+        "name": "Peanut",
+        "username": "peanutjely",
+        "password": "jelly"
+    }
 ]

@@ -162,7 +162,7 @@ router.post("/login", function (request, response) {
     const json = fs.readFileSync(__dirname + "/../../data/users.json", "utf8");
     const users = JSON.parse(json);
 
-    // Check for duplicate username
+    // Check for username
     const byUsername = (user) =>
         user.username.toLowerCase() === request.body.username.toLowerCase();
     const matchingUser = users.find(byUsername);
@@ -199,10 +199,11 @@ router.post("/logout", function (request, response) {
             console.info("LOG: User logged out");
             response.status(204).end();
         });
-    } else {
-        console.warn("LOG: **ERROR: User not logged in!");
-        response.status(403).json({ error: "Forbidden: User not logged in!" });
     }
+    //  else {
+    //     console.warn("LOG: **ERROR: User not logged in!");
+    //     response.status(403).json({ error: "Forbidden: User not logged in!" });
+    // }
 });
 
 module.exports = router;

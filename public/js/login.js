@@ -35,7 +35,7 @@ const postNewUser = async (name, username, password) => {
     if (newUserResponse.ok) {
         console.log("User created successfully!");
         console.log(newUserResponse.status);
-        // document.location.replace("/todos");
+        document.location.replace("/todos");
     }
 };
 
@@ -57,7 +57,7 @@ const loginUser = async (username, password) => {
         return;
     }
     console.log("Login successful.");
-    // document.location.replace("/todos");
+    document.location.replace("/todos");
 };
 
 const registerFormSubmit = async () => {

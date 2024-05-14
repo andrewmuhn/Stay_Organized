@@ -7,7 +7,12 @@ const postNewTodo = async (event) => {
             category: document.getElementById("category").value,
             description: document.getElementById("description").value,
             deadline: document.getElementById("deadline").value,
-            priority: document.getElementById("priority").value,
+            priority:
+                document
+                    .getElementById("priority")
+                    .value.charAt(0)
+                    .toUpperCase() +
+                document.getElementById("priority").value.slice(1),
         }),
         headers: {
             "Content-Type": "application/json",
