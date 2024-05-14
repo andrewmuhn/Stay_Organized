@@ -1,55 +1,56 @@
-# Stay Organized Workshop Server
-This is intended to be the backend for the Stay Organized workshop.
+# Project Overview
 
-## Setup this server locally
-This section will discuss how to get the Stay Organized server up and running locally
+This project is a simple yet powerful Todo application. It allows users to create, view, and manage their tasks. Each task, or "Todo", has a category, description, deadline, priority, and completion status. The application supports multiple users, each with their own set of Todos.
 
-- Verify Node.js is installed by running the following command.
-  
-  **Command to run**
-  ```bash
-    node -v
-  ```
-  **Sample Output**
-  ```bash
-    v14.15.4     (or something similar)
-  ```
+The application is built with Node.js and Express for the backend, and uses Handlebars for server-side rendering of the HTML. The data is stored in JSON files, making it easy to manage and update.
 
-  > **Note:** If you do not have Node.js installed, you can install the LTS (Long-term Support) version from here: https://nodejs.org/en/
+## Functionality
 
-- Clone this repository to your local computer.
+### Todo Page
 
-  ```bash
-    git clone https://github.com/DevelopIntelligenceBoulder/stay-organized-workshop-express-server
-  ```
+The home page of the Todo application displays a list of all the Todos for the logged-in user. It shows the category, description, deadline, priority, and completion status of each Todo. Users can mark a Todo as complete, edit a Todo, or delete a Todo from this page.
 
-- Change directories (`cd`) into the newly cloned project folder.
+### Create Todo Page
 
-  ```bash
-    cd stay-organized-workshop-express-server
-  ```
+The create Todo page allows users to add a new Todo to their list. It provides input fields for the category, description, deadline, and priority of the Todo. Users can submit the form to create the Todo.
 
-- Install the projects dependencies with NPM (Node Package Manager).
-  
-  ```bash
-    npm install
-  ```
+### User Registration Modal
 
-- Start the local server
+The user registration Modal allows new users to create an account for the Todo application. It provides input fields for the username and password. Users can submit the form to create their account.
 
-  **Command to start the server**
-  ```bash
-    npm start
-  ```
+### User Login Modal
 
-  **Expected Output**
-  ```bash
-    App listening at port 8083
-  ```
+The user login page allows registered users to log in to the Todo application. It provides input fields for the username and password. Users can submit the form to authenticate and add to their Todos.
 
-- Verify the server is working as expected by acessing http://localhost:8083/api/users with a broswer or a third party tool like [Postman](https://www.postman.com/)
+## Tooling
 
-  **Expected output from URL**
-  ```js
-  [{"id":1,"name":"Ian Auston","username":"gamer04"},{"id":2,"name":"Siddalee Grace","username":"cheer"},{"id":3,"name":"Pursalane Faith","username":"farmgirl"},{"id":4,"name":"Zephaniah Hughes","username":"corndog"},{"id":5,"name":"Ezra Aidden","username":"theaterkid"},{"id":6,"name":"Elisha Aslan","username":"gamer05"},{"id":7,"name":"Betty Smalltree","username":"betty812"}]
-  ```
+### Backend
+
+- ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white) - The runtime environment for executing JavaScript on the server side.
+- ![fs module](https://img.shields.io/badge/fs%20module-339933?logo=node.js&logoColor=white) - A built-in Node.js package for working with the file system. It's used in this project to read and write data to mock database JSON files.
+- ![Express.js](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white) - A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. 
+- ![Express.js](https://img.shields.io/badge/Express%20Session.js-000000?logo=express&logoColor=white) - Added on express-session for user auth.
+
+### Frontend
+
+- ![Handlebars](https://img.shields.io/badge/Handlebars.js-f0772b?logo=handlebarsdotjs&logoColor=white) - A simple templating language that lets you generate HTML dynamically. It's used in this project to render the nav bar across pages and the modals for login/register.
+
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952b3?logo=bootstrap&logoColor=white) - A popular CSS framework that provides pre-designed components and styles for building responsive web pages. It's used in this project to enhance the visual appearance and layout of the application.
+- ![Fetch API](https://img.shields.io/badge/Fetch%20API-005571?logo=mozilla%20firefox&logoColor=white) - A modern interface for making HTTP requests. It's used in this project to communicate with the server and exchange JSON data.
+
+### Testing
+
+- ![Postman](https://img.shields.io/badge/Postman-ff6c37?logo=postman&logoColor=white) - A popular API client that makes it easy to test, develop, and document APIs by allowing users to send requests and see responses.
+
+### Development
+
+- ![Nodemon](https://img.shields.io/badge/Nodemon-76d04b?logo=nodemon&logoColor=white) - A utility that monitors changes in your Node.js application and automatically restarts the server. It's used in this project to improve the development workflow by automatically refreshing the server when changes are made to the code.
+
+### Version Control
+
+- ![Git](https://img.shields.io/badge/Git-f05032?logo=git&logoColor=white) - A free and open-source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+- ![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white) - A web-based hosting service for version control using Git. It's used in this project for source code management.
+
+## Usage
+
+To get started with the project, clone the repository, install the dependencies with `npm install`, and start the server with `npm start`.
