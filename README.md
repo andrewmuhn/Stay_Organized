@@ -54,3 +54,13 @@ The user login page allows registered users to log in to the Todo application. I
 ## Usage
 
 To get started with the project, clone the repository, install the dependencies with `npm install`, and start the server with `npm start`.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Credits
+
+This project was created by [Andrew Muhn](https://github.com/andrewmuhn).
