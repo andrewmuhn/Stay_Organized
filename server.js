@@ -3,16 +3,29 @@ const path = require("path");
 const cors = require("cors");
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});
-const fs = require("fs");
-const { helpers } = require("handlebars");
 const routes = require("./controllers");
+require("dotenv").config();
+const session = require("express-session");
 
 const app = express();
 
 ///////////////////////////////////////////////////////////////////////
 //   MIDDLEWARE (CONFIGURATIONS) //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-// Set up Handlebars as the view engin
+const sess = {
+    secret: "Super secret secret",
+    cookie: {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: false,
+    },
+    resave: false,
+    saveUninitialized: true,
+};
+
+app.use(session(sess));
+
+// Set up Handlebars as the view engine
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");

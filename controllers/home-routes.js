@@ -1,14 +1,16 @@
+const withAuth = require("../utils/auth");
+
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
     res.render("home");
 });
 
-router.get("/todos", async (req, res) => {
+router.get("/todos", withAuth, async (req, res) => {
     res.render("todos");
 });
 
-router.get("/new_todo", async (req, res) => {
+router.get("/new_todo", withAuth, async (req, res) => {
     res.render("new_todo");
 });
 
