@@ -48,6 +48,21 @@ router.get("/username_available/:username", function (request, response) {
     response.status(200).json(availability);
 });
 
+router.get("/session", function (request, response) {
+    console.info("LOG: Got a GET request for the session");
+
+    if (request.session.logged_in) {
+        console.info("LOG: Session found ->", request.session);
+        response.status(200).json({
+            user_id: request.session.user_id,
+            logged_in: request.session.logged_in,
+        });
+    } else {
+        console.warn("LOG: **ERROR: Session not found!");
+        response.status(404).json({ error: "Not Found: Session not found!" });
+    }
+});
+
 // GET a specific user
 // NOTE: this endpoint returns the user without the password
 router.get("/:username", function (request, response) {
