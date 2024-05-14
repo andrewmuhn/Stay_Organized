@@ -1,8 +1,16 @@
 <h1>Create a New ToDo</h1>
 <form class="form m-3" id="newTodo">
     <div class="form-group">
-        <label for="userid">User ID:</label>
-        <input class="form-control" type="number" name="userid" id="userid" min="1" required>
+        {{! <label for="userid">User ID:</label> }}
+        <input
+            class="form-control"
+            type="hidden"
+            name="userid"
+            id="userid"
+            min="1"
+            required
+            value="{{userId}}"
+        />
     </div>
     <div class="form-group">
         <label for="category">Category:</label>
@@ -10,11 +18,22 @@
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" name="description" id="description"></textarea>
+        <textarea
+            class="form-control"
+            name="description"
+            id="description"
+        ></textarea>
     </div>
     <div class="form-group">
         <label for="deadline">Deadline:</label>
-        <input class="form-control" type="date" name="deadline" id="deadline" pattern="\d{4}-\d{2}-\d{2}" required>
+        <input
+            class="form-control"
+            type="date"
+            name="deadline"
+            id="deadline"
+            pattern="\d{4}-\d{2}-\d{2}"
+            required
+        />
     </div>
     <div class="form-group mb-3">
         <label for="priority">Priority:</label>

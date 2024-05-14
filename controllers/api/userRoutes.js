@@ -48,6 +48,21 @@ router.get("/username_available/:username", function (request, response) {
     response.status(200).json(availability);
 });
 
+router.get("/session", function (request, response) {
+    console.info("LOG: Got a GET request for the session");
+
+    if (request.session.logged_in) {
+        console.info("LOG: Session found ->", request.session);
+        response.status(200).json({
+            user_id: request.session.user_id,
+            logged_in: request.session.logged_in,
+        });
+    } else {
+        console.warn("LOG: **ERROR: Session not found!");
+        response.status(404).json({ error: "Not Found: Session not found!" });
+    }
+});
+
 // GET a specific user
 // NOTE: this endpoint returns the user without the password
 router.get("/:username", function (request, response) {
@@ -136,10 +151,74 @@ router.post("/", function (request, response) {
         JSON.stringify(users)
     );
 
-    // LOG data for tracing
-    console.info("LOG: New user added is ->", user);
+    request.session.save(() => {
+        request.session.user_id = user.id;
+        request.session.logged_in = true;
+        console.info("LOG: New user added is ->", user);
+        response.status(201).json(user);
+    });
+});
 
-    response.status(201).json(user);
+router.post("/login", function (request, response) {
+    console.info("LOG: Got a POST request to login a user");
+    console.info("LOG: Message body -------->", JSON.stringify(request.body));
+
+    // If not all user data passed, reject the request
+    if (!request.body.username || !request.body.password) {
+        console.warn(
+            "LOG: **MISSING DATA**: one or more user properties missing"
+        );
+        response.status(400).json({
+            error: "Missing data, can't process: one or more User properties missing.",
+        });
+        return;
+    }
+
+    const json = fs.readFileSync(__dirname + "/../../data/users.json", "utf8");
+    const users = JSON.parse(json);
+
+    // Check for username
+    const byUsername = (user) =>
+        user.username.toLowerCase() === request.body.username.toLowerCase();
+    const matchingUser = users.find(byUsername);
+
+    if (matchingUser === undefined) {
+        console.warn("LOG: **ERROR: username/password is incorrect!");
+        response
+            .status(403)
+            .json({ error: "Forbidden: Username or password is incorrect!" });
+        return;
+    }
+
+    if (matchingUser.password !== request.body.password) {
+        console.warn("LOG: **ERROR: username/password is incorrect!");
+        response
+            .status(403)
+            .json({ error: "Forbidden: Username or password is incorrect!" });
+        return;
+    }
+
+    request.session.save(() => {
+        request.session.user_id = matchingUser.id;
+        request.session.logged_in = true;
+        console.info("LOG: User logged in ->", matchingUser);
+        response.status(200).json(matchingUser);
+    });
+});
+
+router.post("/logout", function (request, response) {
+    console.info("LOG: Got a POST request to logout a user");
+
+    if (request.session.logged_in) {
+        request.session.destroy(() => {
+            console.info("LOG: User logged out");
+            response.status(204).end();
+        });
+    }
+    //  else {
+    //     console.warn("LOG: **ERROR: User not logged in!");
+    //     response.status(403).json({ error: "Forbidden: User not logged in!" });
+    // }
 });
 
 module.exports = router;

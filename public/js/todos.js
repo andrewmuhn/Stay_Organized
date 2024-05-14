@@ -1,3 +1,17 @@
+displayLoggedInTodos = async () => {
+    const sessionResponse = await fetch("/api/users/session", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (sessionResponse.ok) {
+        const user = await sessionResponse.json();
+        loadTodos(user.user_id);
+    }
+};
+
 const loadUsers = async () => {
     const usersResponse = await fetch("/api/users", {
         method: "GET",
@@ -38,7 +52,6 @@ loadTodos = async (userid) => {
                     break;
                 case "Medium":
                     card.className = "card bg-warning-subtle";
-
                     cardHeader.className = "card-header d-flex bg-warning";
                     break;
                 default:
@@ -146,6 +159,7 @@ markComplete = async (todoId) => {
 };
 
 loadUsers();
+displayLoggedInTodos();
 
 document.getElementById("userSelect").addEventListener("change", (event) => {
     document.getElementById("todosContainer").innerHTML = "";

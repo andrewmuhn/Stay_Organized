@@ -62,13 +62,18 @@
                         </ul>
                         <div class="flex-grow-1"></div>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            {{#if logged_in}}
+                            <li class="nav-item">
+                                <a href="" class="nav-link" id="logoutNav">Logout</a>
+                            </li>
+                            {{else}}
                             <li class="nav-item">
                                 <a href="" class="nav-link" id="registerNav" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">Login</a>
+                                <a href="" class="nav-link" id="loginNav" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
                             </li>
-                            <li class="nav-item d-none">Logout</li>
+                            {{/if}}
                         </ul>
                     </div>
                 </div>
@@ -76,6 +81,7 @@
         </header>
         <main>
             {{> registermodal}}
+            {{> loginmodal}}
             {{{body}}}
         </main>
         <script
@@ -85,5 +91,8 @@
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
         <script src="/js/login.js"></script>
+        {{#if logged_in}}
+        <script src="/js/logout.js"></script>
+        {{/if}}
     </body>
 </html>
