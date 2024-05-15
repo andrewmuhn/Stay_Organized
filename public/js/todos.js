@@ -1,19 +1,19 @@
 const params = new URLSearchParams(window.location.search);
 
 let user_id = params.get("userid");
-getSession = async () => {
-    const sessionResponse = await fetch("/api/users/session", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+// getSession = async () => {
+//     const sessionResponse = await fetch("/api/users/session", {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//     });
 
-    if (sessionResponse.ok) {
-        const user = await sessionResponse.json();
-        user_id = user.id;
-    }
-};
+//     if (sessionResponse.ok) {
+//         const user = await sessionResponse.json();
+//         user_id = user.id;
+//     }
+// };
 
 const loadUsers = async () => {
     const usersResponse = await fetch("/api/users", {
@@ -159,8 +159,9 @@ markComplete = async (todoId) => {
             "Content-Type": "application/json",
         },
     });
-    console.log(todoResponse.userid, user_id);
-    if (todoResponse.userid !== user_id) {
+    todoResponseJson = await todoResponse.json();
+    console.log(todoResponseJson.userid, user_id);
+    if (todoResponseJson.userid !== user_id) {
         alert("You can only mark your own todos as complete.");
         return;
     }
@@ -173,12 +174,12 @@ markComplete = async (todoId) => {
     });
     if (completeResponse.ok) {
         document.getElementById("todosContainer").innerHTML = "";
-        loadTodos(document.getElementById("userSelect").value);
+        loadTodos(user_id);
     }
 };
 
 loadUsers();
-getSession();
+// getSession();
 loadTodos(user_id);
 
 document.getElementById("userSelect").addEventListener("change", (event) => {
