@@ -57,7 +57,7 @@ const loginUser = async (username, password) => {
         return;
     }
     console.log("Login successful.");
-    document.location.replace("/todos");
+    document.location.replace("/todos?userid=" + user.id);
 };
 
 const registerFormSubmit = async () => {

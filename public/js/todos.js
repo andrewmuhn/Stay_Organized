@@ -1,4 +1,7 @@
-displayLoggedInTodos = async () => {
+const params = new URLSearchParams(window.location.search);
+
+let user_id = params.get("userid");
+getSession = async () => {
     const sessionResponse = await fetch("/api/users/session", {
         method: "GET",
         headers: {
@@ -8,7 +11,7 @@ displayLoggedInTodos = async () => {
 
     if (sessionResponse.ok) {
         const user = await sessionResponse.json();
-        loadTodos(user.user_id);
+        user_id = user.id;
     }
 };
 
@@ -113,6 +116,10 @@ loadTodos = async (userid) => {
             completeButton.type = "button";
             completeButton.className = "btn btn-success btn-sm";
             completeButton.textContent = "Mark Complete";
+            if (todo.completed) {
+                completeButton.textContent = "Mark Inprogress";
+                completeButton.className = "btn btn-warning btn-sm";
+            }
             completeButton.value = "Complete";
             completeButton.setAttribute("data-todo-id", todo.id);
 
@@ -146,6 +153,18 @@ deleteTodo = async (todoId) => {
 };
 
 markComplete = async (todoId) => {
+    const todoResponse = await fetch(`/api/todos/${todoId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    console.log(todoResponse.userid, user_id);
+    if (todoResponse.userid !== user_id) {
+        alert("You can only mark your own todos as complete.");
+        return;
+    }
+
     const completeResponse = await fetch(`/api/todos/${todoId}`, {
         method: "PUT",
         headers: {
@@ -159,7 +178,8 @@ markComplete = async (todoId) => {
 };
 
 loadUsers();
-displayLoggedInTodos();
+getSession();
+loadTodos(user_id);
 
 document.getElementById("userSelect").addEventListener("change", (event) => {
     document.getElementById("todosContainer").innerHTML = "";

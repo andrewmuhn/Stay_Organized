@@ -22,7 +22,9 @@ const postNewTodo = async (event) => {
     if (newTodoResponse.ok) {
         console.log("Todo created successfully!");
         console.log(newTodoResponse.status);
-        document.location.replace("/todos");
+        document.location.replace(
+            "/todos?userid=" + document.getElementById("userid").value
+        );
     }
 };
 

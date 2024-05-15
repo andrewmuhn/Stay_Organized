@@ -9,6 +9,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="/css/style.css" />
         <title>Stay Organized</title>
     </head>
     <body>
@@ -80,6 +81,15 @@
             </nav>
         </header>
         <main>
+        <div style="position: relative;">
+            <video
+                src="/images/ShortNotebookflip.mp4"
+                autoplay
+                muted
+                style="width: 100%; height: auto; z-index: -1; position: absolute; top: 0; left: 0;"
+                playbackRate="0.25"
+            ></video>
+        </div>
             {{> registermodal}}
             {{> loginmodal}}
             {{{body}}}
@@ -93,6 +103,7 @@
         <script src="/js/login.js"></script>
         {{#if logged_in}}
         <script src="/js/logout.js"></script>
+        <script src="/js/home.js"></script>
         {{/if}}
     </body>
 </html>
