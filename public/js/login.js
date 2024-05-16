@@ -9,7 +9,6 @@ const checkUserNameAvailability = async (username, name, password) => {
         }
     );
     const userAvailable = await userResponse.json();
-    console.log(userAvailable);
     if (!userAvailable.available) {
         alert("Username is already taken.");
         return;
@@ -30,11 +29,9 @@ const postNewUser = async (name, username, password) => {
             "Content-Type": "application/json",
         },
     });
-    console.log(newUserResponse);
 
     if (newUserResponse.ok) {
         console.log("User created successfully!");
-        console.log(newUserResponse.status);
         document.location.replace("/todos");
     }
 };
@@ -51,7 +48,6 @@ const loginUser = async (username, password) => {
         },
     });
     const user = await userResponse.json();
-    console.log(user);
     if (userResponse.status === 403) {
         alert("Username or password is incorrect.");
         return;
@@ -90,7 +86,6 @@ const loginFormSubmit = async () => {
         event.preventDefault();
         let username = document.getElementById("loginUsername").value.trim();
         let password = document.getElementById("loginPassword").value.trim();
-        console.log(username, password);
         loginUser(username, password);
     });
 };

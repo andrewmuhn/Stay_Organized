@@ -162,7 +162,8 @@ markComplete = async (todoId) => {
     todoResponseJson = await todoResponse.json();
     console.log(todoResponseJson.userid, user_id);
     if (todoResponseJson.userid !== user_id) {
-        alert("You can only mark your own todos as complete.");
+        let markCompleteModal = new bootstrap.Modal("#markCompleteModal");
+        markCompleteModal.show();
         return;
     }
 
@@ -190,7 +191,6 @@ document.getElementById("userSelect").addEventListener("change", (event) => {
 document
     .getElementById("todosContainer")
     .addEventListener("click", async (event) => {
-        console.log(event.target.value);
         if (event.target.value === "Delete") {
             const todoId = event.target.getAttribute("data-todo-id");
             deleteTodo(todoId);
