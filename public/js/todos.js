@@ -46,7 +46,7 @@ loadTodos = async (userid) => {
         const todos = await todosResponse.json();
         todos.forEach((todo) => {
             const card = document.createElement("div");
-            card.style = "width: 18rem; display: inline-block; margin: 10px;";
+            card.style = "display: inline-block; margin: 10px;";
             const cardHeader = document.createElement("div");
             switch (todo.priority) {
                 case "High":
@@ -135,6 +135,38 @@ loadTodos = async (userid) => {
             card.appendChild(cardBody);
 
             document.getElementById("todosContainer").appendChild(card);
+
+            let todosContainerChildren = document.querySelectorAll(
+                "#todosContainer > div"
+            );
+
+            todosContainerChildren.forEach((child, index) => {
+                if (window.innerWidth > 768) {
+                    switch (index % 4) {
+                        case 0: // for every 1st element in the pattern
+                            child.style.gridColumn = "1 / span 1";
+                            break;
+                        case 1: // for every 2nd element in the pattern
+                            child.style.gridColumn = "2 / span 1";
+                            break;
+                        case 2: // for every 3rd element in the pattern
+                            child.style.gridColumn = "4 / span 1";
+                            break;
+                        case 3: // for every 4th element in the pattern
+                            child.style.gridColumn = "5 / span 1";
+                            break;
+                    }
+                } else {
+                    switch (index % 2) {
+                        case 0: // for every 1st element in the pattern
+                            child.style.gridColumn = "1 / span 2";
+                            break;
+                        case 1: // for every 2nd element in the pattern
+                            child.style.gridColumn = "4 / span 2";
+                            break;
+                    }
+                }
+            });
         });
     }
 };
